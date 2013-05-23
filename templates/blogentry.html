@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="box">
+    <div class="caption">
+	    <h2>{{ post.title }}</h2>
+	</div>
+    <div class="text">
+		<p>{{ post.body }}</p>
+	</div>
+		<p>Запись опубликована: {{ post.timestamp }}</p>
+		<p>Теги:
+            {%for tag in post.tags.all %}
+				<a href ={% url "blog.views.archive" %}?tag={{ tag }}>{{tag}}</a>
+            {% endfor %}</p>
+</div>
+<div class="box"><p>Количество комментариев: {{ post.commentsCounter }}</p></div>
+{% for comment in comments %}
+	<div class="box">
+    	<span>Автор: {{ comment.author }}</span>
+    	<p>{{ comment.comment }}</p>
+    	<p>Ответил: {{ comment.timestamp }}</p>
+	</div>
+{% endfor %}
+
+
+<form action="" method="post">{% csrf_token %}
+	<div class="box">
+        {{ form.non_field_errors }}
+            {{ form.author.errors }}
+			<label for="id_author">Ваше имя:</label>
+			<input class="input_text" id="id_author" maxlength="30" name="author" type="text" />
+            {{ form.message.errors }}
+			<label for="id_message">Текст комментария:</label>
+			<textarea class="message" cols="40" id="id_message" name="message" rows="10"></textarea>
+			<input type="submit" class="button" value="Отправить" />
+		</div>
+	</form>
+{% endblock %}
+

@@ -1,0 +1,21 @@
+<html>
+{% load staticfiles %}
+<head>
+<link href="{% static "css/style.css" %}" rel="stylesheet" />
+</head>
+<body>
+<h1><a href="/">Blog Application</a></h1>
+
+<div class="box">
+	<form action="/blog/filter">
+		<div class="input_text">
+		<span>Поиск по тэгам:</span><input type="text" class="input_text" name="tag">
+		<input type="submit" class="button" value="Искать">
+	    </div>
+	</form>
+</div>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
