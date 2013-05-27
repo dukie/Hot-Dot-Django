@@ -37,7 +37,7 @@ def viewBlogPost(request,id):
                 newComment.comment = form.cleaned_data['message']
                 newComment.save()
         else:
-            form = AddCommentForm(initial={'blogPost': blogPost})
+            form = AddCommentForm()
         return render(request, 'blogentry.html',{'post': blogPost, 'comments': comments, 'form':form})
     except BlogPost.DoesNotExist:
         return redirect('blog.views.archive')
